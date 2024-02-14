@@ -65,9 +65,9 @@ function renderGreenPeppers() {
 function renderWhiteSauce() {
   document.querySelectorAll('.sauce').forEach((el) => {
     if (state.whiteSauce) {
-      el.style.visibility = 'hidden';
-    } else {
       el.style.visibility = 'visible';
+    } else {
+      el.style.visibility = 'hidden';
     }
   });
 }
@@ -75,14 +75,12 @@ function renderWhiteSauce() {
 function renderGlutenFreeCrust() {
   document.querySelectorAll('.crust').forEach((el) => {
     if (state.glutenFreeCrust) {
-      el.style.visibility = 'hidden';
-    } else {
       el.style.visibility = 'visible';
+    } else {
+      el.style.visibility = 'hidden';
     }
   });
 }
-
-// WRONG !!!!!!!!!!!!!!!!!!!
 
 function renderButtons() {
   // Iteration 3: add/remove the class "active" of each `<button class="btn">`
@@ -94,14 +92,14 @@ function renderButtons() {
     let buttonState = false;
     if (secondClass === 'btn-pepperoni') {
       buttonState = state.pepperoni;
-      // } else if (secondClass === 'btn-pepperoni') {
-      //   buttonState = state.pepperoni;
-      // } else if (secondClass === 'btn-pepperoni') {
-      //   buttonState = state.pepperoni;
-      // } else if (secondClass === 'btn-pepperoni') {
-      //   buttonState = state.pepperoni;
-      // } else if (secondClass === 'btn-pepperoni') {
-      //   buttonState = state.pepperoni;
+    } else if (secondClass === 'btn-mushrooms') {
+      buttonState = state.mushrooms;
+    } else if (secondClass === 'btn-green-peppers') {
+      buttonState = state.greenPeppers;
+    } else if (secondClass === 'btn-sauce') {
+      buttonState = state.whiteSauce;
+    } else if (secondClass === 'btn-crust') {
+      buttonState = state.glutenFreeCrust;
     }
 
     if (buttonState === true) {
@@ -111,10 +109,20 @@ function renderButtons() {
     }
   });
 }
+// WRONG !!!!!!!!!!!!!!!!!!!
 
 function renderPrice() {
   // Iteration 4: change the HTML of `<aside class="panel price">`
   const pepPrice = document.getElementsByClassName('price-pepperoni')[0];
+  const mushPrice = document.getElementsByClassName('price-mushrooms')[0];
+  const greenPeperPrice = document.getElementsByClassName(
+    'price-green-peppers'
+  )[0];
+  const whiteSaucePrice =
+    document.getElementsByClassName('price-white-sauce')[0];
+  const crustPrice = document.getElementsByClassName(
+    'price-gluten-free-crust'
+  )[0];
   const totalPriceElement = document.getElementsByClassName('total-price')[0];
   let totalPrice = basePrice;
 
@@ -124,7 +132,30 @@ function renderPrice() {
   } else {
     pepPrice.style.display = 'none';
   }
-  // fazer de todos
+  if (state.mushrooms) {
+    mushPrice.style.display = 'block';
+    totalPrice += ingredients.mushrooms.price;
+  } else {
+    mushPrice.style.display = 'none';
+  }
+  if (state.greenPeppers) {
+    greenPeperPrice.style.display = 'block';
+    totalPrice += ingredients.greenPeppers.price;
+  } else {
+    greenPeperPrice.style.display = 'none';
+  }
+  if (state.whiteSauce) {
+    whiteSaucePrice.style.display = 'block';
+    totalPrice += ingredients.whiteSauce.price;
+  } else {
+    whiteSaucePrice.style.display = 'none';
+  }
+  if (state.glutenFreeCrust) {
+    crustPrice.style.display = 'block';
+    totalPrice += ingredients.glutenFreeCrust.price;
+  } else {
+    crustPrice.style.display = 'none';
+  }
 
   totalPriceElement.textContent = `\$${totalPrice}`;
 }
